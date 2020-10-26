@@ -3,12 +3,20 @@
 	<head>
 		<meta charset="utf-8">
 		<title>SnapShotSki</title>
+
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js">
+			$(document).ready(function() {
+    		$('#textarea1').characterCounter();
+  		});
+		</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
 		<link rel="apple-touch-icon" sizes="180x180" href="/KIfav/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="/KIfav/favicon-32x32.png">
 		<link rel="icon" type="image/png" sizes="16x16" href="/KIfav/favicon-16x16.png">
 		<link rel="manifest" href="/KIfav/site.webmanifest">
+
 	</head>
 	<header>
 		<%- include('./nav.ejs') %>

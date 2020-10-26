@@ -1,21 +1,30 @@
 <%- include('../partials/header.ejs') %>
 
 <div class="row">
-	<form class="col s10 offset-s1" action="/users" method="POST">
+	<form class="col s10 offset-s1" action="/users" method="POST" enctype="multipart/form-data">
+		<div class="file-field input-field">
+      <div class="btn">
+        <span>Image</span>
+        <input type="file" name="profilePic">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
 		<div class="row">
 			<div class="input-field col s6">
-				<input type="text" id="first_name" name="firstName" class="validate">
-				<label for="first_name">First Name</label>
+				<input type="text" id="firstName" name="firstName" class="validate">
+				<label for="firstName">First Name</label>
 			</div>
 			<div class="input-field col s6">
-				<input type="text" id="last_name" name="lastName" class="validate">
-				<label for="last_name">Last Name</label>
+				<input type="text" id="lastName" name="lastName" class="validate">
+				<label for="lastName">Last Name</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<input type="text" id="user_name" name="userName" class="validate">
-				<label for="user_name">Username</label>
+				<input type="text" id="userName" name="userName" class="validate">
+				<label for="userName">Username</label>
 			</div>
 			<div class="input-field col s6">
 				<input type="password" id="password" name="password" class="validate">
@@ -23,9 +32,9 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="input-field col s12">
-				<textarea type="text" id="textarea1" name="bio" class="validate" data-length="150"></textarea>
-				<label for="textarea1">Bio</label>
+			<div class="input-field col s6">
+				<textarea type="text" id="textarea1" name="bio" class="materialize-textarea" maxlength="300"></textarea>
+				<label for="textarea1" class="center-align"> Bio</label>
 			</div>
 		</div>
 		<div class="row">

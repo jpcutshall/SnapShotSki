@@ -1,0 +1,25 @@
+<%- include('../partials/header.ejs') %>
+
+<div class="col s10 offset-s1">
+	<div class="row">
+		<div class="col s3 card-panel grey z-depth-1">
+			<div class="row">
+				<img src="<%= user.profilePic %>" />
+				<div class="row">
+					<%= user.firstName %> <%= user.lastName %>
+				</div>
+			</div>
+			<div class="row">
+				<p>
+					<%= user.bio %>
+					</p>
+			</div>
+		</div>
+		<div class="col s7">
+			<h1><%= user.userName %></h1>
+		</div>
+	</div>
+
+</div>
+
+<%- include('../partials/footer.ejs') %>

@@ -1,5 +1,45 @@
 <%- include('../partials/header.ejs') %>
 
+<div class="row">
+	<form class="col s10 offset-s1" action="/users" method="POST" enctype="multipart/form-data">
+		<div class="row">
+			<div class="input-field col s6 offset-s3">
+				<input id="profilePic" type="file" name="profilePic" accept="image/*" >
+				<label for="profilePic">Profile Picture</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<input type="text" id="firstName" name="firstName" >
+				<label for="firstName">First Name</label>
+			</div>
+			<div class="input-field col s6">
+				<input type="text" id="lastName" name="lastName" >
+				<label for="lastName">Last Name</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<input type="text" id="userName" name="userName" class="validate">
+				<label for="userName">Username</label>
+			</div>
+			<div class="input-field col s6">
+				<input type="password" id="password" name="password" class="validate">
+				<label for="password">Password</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<textarea type="text" id="textarea1" name="bio" class="materialize-textarea" maxlength="300"></textarea>
+				<label for="textarea1" class="center-align"> Bio</label>
+			</div>
+		</div>
+		<div class="row">
+			<button class="btn waves-effect waves-light" type="submit" name="action">Create<i class="material-icons right">account_box</i></button>
 
+		</div>
+	</form>
+
+</div>
 
 <%- include('../partials/footer.ejs') %>

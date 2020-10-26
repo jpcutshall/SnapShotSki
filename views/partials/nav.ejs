@@ -2,9 +2,17 @@
 	<div class="nav-wrapper">
 		<a href="/home" class="brand-logo">Home</a>
 		<ul id="nav-mobile" class="right hide-on-med-and-down">
-			<li>Profile</li>
-			<li>Post</li>
-			<li>Settings</li>
+			<% if(currentUser) {%>
+			<li><a><%= currentUser.userName %></a> </li>
+			<li>
+			<form class="" action="/sessions?_method=DELETE" method="POST">
+				<button class="btn-large waves-effect waves-light" type="submit" name="action">Log Out</button>
+			</form>
+			</li>
+		<%} else {  %>
+			<li><a href="/sessions/new">Login</a></li>
+			<li><a href="/users/new">Sign Up</a></li>
+		<% } %>
 		</ul>
 	</div>
 </nav>

@@ -31,10 +31,15 @@ mongoose.connection.once('open', ()=> {
 });
 
 // controllers
+const usersController = require('./controllers/usersController.js')
+app.use('/users', usersController)
+
+const sessionsController = require('./controllers/sessionsController.js')
+app.use('/sessions', sessionsController)
 
 
 app.get('/', (req,res) => {
-	res.render('home.ejs')   // pass collection of posts
+	res.render('home.ejs', {currentUser: req.session.currentUser})   // pass collection of posts
 })
 
 app.listen(PORT, () => {

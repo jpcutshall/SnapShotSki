@@ -38,10 +38,11 @@ router.get('/new', (req, res) => {
 	res.render('users/new.ejs',{currentUser: req.session.currentUser})
 })
 
-router.get('/:id/edit', (req, res) => {
-	User.findById(req.params.id, (err, foundUser) => {
-		res.render('users/edit.ejs', {
-			currentUser: req.session.currentUser
+router.get('/:username/edit', (req, res) => {
+	User.findOne({userName: req.params.username}, (err, foundUser) => {
+		res.render('users/show.ejs', {
+			currentUser: req.session.currentUser,
+			user: foundUser
 		})
 	})
 })
@@ -71,6 +72,19 @@ router.post('/', upload.single('profilePic'), (req, res) => {
 	User.create(obj, (err, createdUser) => {
 		console.log('Account Created!', createdUser)
 		res.redirect('/')
+	})
+})
+
+router.put('/:username', upload.single('profilePic'), (req, res) => {
+	const obj = {
+		firstName: req.body.firstName,
+		lastName: req.body.lastName,
+		bio: req.body.bio,
+		profilePic: req.file.path
+
+	}
+	User.findOneAndUpdate({userName: req.params.username}, obj, (err, updatedUser) => {
+		res.redirect
 	})
 })
 

@@ -1,11 +1,13 @@
 <%- include('../partials/header.ejs') %>
-
+<div class="row">
+	<h2 class="center">Edit Profile</h2>
+</div>
 <div class="row">
 	<form class="col s10 offset-s1" action="/users/<%=user.userName%>?_method=PUT" method="POST" enctype="multipart/form-data">
 		<div class="file-field input-field">
       <div class="btn">
         <span>Image</span>
-        <input type="file" name="profilePic">
+        <input type="file" name="profilePic" value="<%=user.profilePic%>">
       </div>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
@@ -13,23 +15,23 @@
     </div>
 		<div class="row">
 			<div class="input-field col s6">
-				<input type="text" id="firstName" name="firstName" class="validate">
+				<input type="text" id="firstName" name="firstName" class="validate" value="<%=user.firstName%>">
 				<label for="firstName">First Name</label>
 			</div>
 			<div class="input-field col s6">
-				<input type="text" id="lastName" name="lastName" class="validate">
+				<input type="text" id="lastName" name="lastName" class="validate" value="<%=user.lastName%>">
 				<label for="lastName">Last Name</label>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="input-field col s6">
-				<textarea type="text" id="textarea1" name="bio" class="materialize-textarea" maxlength="300"></textarea>
+				<textarea type="text" id="textarea1" name="bio" class="materialize-textarea" maxlength="500"><%=user.bio%></textarea>
 				<label for="textarea1" class="center-align"> Bio</label>
 			</div>
 		</div>
 		<div class="row">
-			<button class="btn waves-effect waves-light" type="submit" name="action">Create<i class="material-icons right">account_box</i></button>
+			<button class="btn waves-effect waves-light" type="submit" name="action">Done Editing<i class="material-icons right">account_box</i></button>
 
 		</div>
 	</form>

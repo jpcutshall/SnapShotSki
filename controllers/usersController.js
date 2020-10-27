@@ -40,7 +40,7 @@ router.get('/new', (req, res) => {
 
 router.get('/:username/edit', (req, res) => {
 	User.findOne({userName: req.params.username}, (err, foundUser) => {
-		res.render('users/show.ejs', {
+		res.render('users/edit.ejs', {
 			currentUser: req.session.currentUser,
 			user: foundUser
 		})
@@ -76,15 +76,15 @@ router.post('/', upload.single('profilePic'), (req, res) => {
 })
 
 router.put('/:username', upload.single('profilePic'), (req, res) => {
-	const obj = {
+	const editedObj = {
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
 		bio: req.body.bio,
 		profilePic: req.file.path
 
 	}
-	User.findOneAndUpdate({userName: req.params.username}, obj, (err, updatedUser) => {
-		res.redirect
+	User.findOneAndUpdate({userName: req.params.username}, editedObj, (err, updatedUser) => {
+		res.redirect('/users/' + req.params.username)
 	})
 })
 

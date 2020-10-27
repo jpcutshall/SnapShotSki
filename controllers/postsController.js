@@ -34,5 +34,22 @@ const upload = multer({
 
 // ROUTES
 router.get('/new', (req, res) => {
-	res.render('posts/new.ejs',)
+	res.render('posts/new.ejs', { currentUser: req.session.currentUser})
 })
+
+router.post('/', upload.single('image'), (req, res) => {
+	const postObj = {
+		title: req.body.title,
+		description: req.body.description,
+		image: req.file.path,
+		author: req.session.currentUser.userName
+	}
+	Post.create(postObj, (err, createdPost) => {
+		console.log('Post Posted! ', createdPost)
+		res.redirect('/')
+	})
+})
+
+
+
+module.exports = router

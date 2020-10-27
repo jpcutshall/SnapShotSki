@@ -22,12 +22,15 @@
 				<a class="btn-small waves-effect waves-light" href="/users/<%=user.userName%>/edit">Edit</a>
 			</div>
 		</div>
-		<div class="col s6">
-			<h2><%= user.userName %></h2>
-			<div class="row">
-				collection
-				<div class="container">
-
+		<div class="col s8">
+			<div class="container">
+				<h2><%= user.userName %></h2>
+				<div class="col card green lighten-4">
+					<% for(let i = 0; i < posts.length; i++) { console.log('POSTS:', posts)%>
+						<div class="col s4 valign">
+							<img class="responsive-img z-depth-3" src="../<%=posts[i].image.slice(7)%>">
+						</div>
+					<% } %>
 				</div>
 			</div>
 		</div>

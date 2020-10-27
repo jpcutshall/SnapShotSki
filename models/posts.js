@@ -8,16 +8,14 @@ const postSchema = Schema({
 	image: { type: String, required: true},
 	likes: [
 	{
-		type: mongoose.Schema.Types.ObjectId,
+		type: String,
 		ref: 'User'
 	}
 ],
-	author:[
-		{
-			type: mongoose.Schema.Types.ObjectId,
+	author:	{
+			type: String,
 			ref: 'User'
 		}
-	]
 }, { timestamps: { createdAt: 'created_at' } })
 
 const Post = mongoose.model('Post', postSchema)

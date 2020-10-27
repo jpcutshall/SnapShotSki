@@ -3,6 +3,7 @@ const express = require('express')
 const multer = require('multer')
 const router = express.Router()
 const User = require('../models/users.js')
+const Post = require('../models/posts.js')
 
 const isAuthorized = (req, res, next) => {
 	if (req.session.currentUser) {
@@ -43,7 +44,7 @@ const upload = multer({
 
 // ROUTES
 router.get('/new', (req, res) => {
-	res.render('users/new.ejs',{currentUser: req.session.currentUser})
+	res.render('users/new.ejs', {currentUser: req.session.currentUser})
 })
 
 router.get('/:username/edit', isAuthorized, (req, res) => {
@@ -56,11 +57,16 @@ router.get('/:username/edit', isAuthorized, (req, res) => {
 })
 
 router.get('/:username', isAuthorized, (req, res) => {
+
 	User.findOne({userName: req.params.username}, (err, foundUser) => {
-		res.render('users/show.ejs', {
-			currentUser: req.session.currentUser,
-			user: foundUser
-		})
+		Post.find( { author: req.params.username}, (err, foundPosts) => {
+			res.render('users/show.ejs', {
+				currentUser: req.session.currentUser,
+				user: foundUser,
+				posts: foundPosts
+
+				})
+			})
 	})
 })
 

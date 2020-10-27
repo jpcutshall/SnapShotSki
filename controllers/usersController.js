@@ -14,7 +14,23 @@ const storage = multer.diskStorage({
 	}
 })
 
-const upload = multer({ storage: storage })
+const fileFilter = (req, file, cb) => {
+
+	if(file.mimetype === 'image/jpeg' || file.mimtype === 'image/png' || file.mimtype === 'image/jpg' || file.mimtype === 'image/gif'){
+		cb(null, true) //accept file
+	} else {
+	 cb(null, false) // reject file
+	}
+
+}
+
+const upload = multer({
+	storage: storage,
+		limits: {
+			fileSize: 1024 * 1024 * 50
+				},
+		fileFilter: fileFilter
+ })
 
 
 // ROUTES
@@ -30,8 +46,8 @@ router.get('/:id/edit', (req, res) => {
 	})
 })
 
-router.get('/:id', (req, res) => {
-	User.findById(req.params.id, (err, foundUser) => {
+router.get('/:username', (req, res) => {
+	User.findOne({userName: req.params.username}, (err, foundUser) => {
 		res.render('users/show.ejs', {
 			currentUser: req.session.currentUser,
 			user: foundUser
@@ -41,6 +57,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', upload.single('profilePic'), (req, res) => {
 	req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+
 	const obj = {
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,

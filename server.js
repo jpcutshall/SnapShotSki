@@ -13,6 +13,7 @@ const mongodbURI = process.env.MONGODBURI
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'))
 app.use(express.static(__dirname + '/public'));
+app.use('/public/', express.static('uploads'))
 
 
 // SESSIONS

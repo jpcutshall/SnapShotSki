@@ -1,33 +1,27 @@
 <%- include('../partials/header.ejs') %>
 
 <div class="row">
-	<form class="col s10 offset-s1" action="/users" method="POST" enctype="multipart/form-data">
-		<div class="row">
-			<div class="input-field col s6 offset-s3">
-				<input id="profilePic" type="file" name="profilePic" accept="image/*" >
-				<label for="profilePic">Profile Picture</label>
-			</div>
-		</div>
+	<form class="col s10 offset-s1" action="/users/<%=user.id%>?_method=PUT" method="POST" enctype="multipart/form-data">
+		<div class="file-field input-field">
+      <div class="btn">
+        <span>Image</span>
+        <input type="file" name="profilePic">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
 		<div class="row">
 			<div class="input-field col s6">
-				<input type="text" id="firstName" name="firstName" >
+				<input type="text" id="firstName" name="firstName" class="validate">
 				<label for="firstName">First Name</label>
 			</div>
 			<div class="input-field col s6">
-				<input type="text" id="lastName" name="lastName" >
+				<input type="text" id="lastName" name="lastName" class="validate">
 				<label for="lastName">Last Name</label>
 			</div>
 		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<input type="text" id="userName" name="userName" class="validate">
-				<label for="userName">Username</label>
-			</div>
-			<div class="input-field col s6">
-				<input type="password" id="password" name="password" class="validate">
-				<label for="password">Password</label>
-			</div>
-		</div>
+
 		<div class="row">
 			<div class="input-field col s6">
 				<textarea type="text" id="textarea1" name="bio" class="materialize-textarea" maxlength="300"></textarea>

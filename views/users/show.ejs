@@ -1,12 +1,18 @@
 <%- include('../partials/header.ejs') %>
 
-<div class="col s10 offset-s1">
+<div class="row center">
 	<div class="row">
-		<div class="col s3 card-panel grey z-depth-1">
+		<div class="col s2 card-panel green lighten-3 z-depth-1 offset-s1" >
 			<div class="row">
-				<img src="<%= user.profilePic %>" />
+				<% if(user.profilePic === ' ') {%>
+					<i class="large material-icons">account_circle</i>
+				<% } else {%>
+				<img src="../<%= user.profilePic.slice(7) %>" class="responsive-img"/>
+				<% } %>
 				<div class="row">
+					<% if(!(user.firstName === ' ') && !(user.lastName === ' ')) {%>
 					<%= user.firstName %> <%= user.lastName %>
+					<% } %>
 				</div>
 			</div>
 			<div class="row">
@@ -15,8 +21,14 @@
 					</p>
 			</div>
 		</div>
-		<div class="col s7">
-			<h1><%= user.userName %></h1>
+		<div class="col s6">
+			<h2><%= user.userName %></h2>
+			<div class="row">
+				collection
+				<div class="container">
+
+				</div>
+			</div>
 		</div>
 	</div>
 

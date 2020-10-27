@@ -35,6 +35,9 @@ mongoose.connection.once('open', ()=> {
 const usersController = require('./controllers/usersController.js')
 app.use('/users', usersController)
 
+const postsController = require('./controllers/postsController.js')
+app.use('/posts', postsController)
+
 const sessionsController = require('./controllers/sessionsController.js')
 app.use('/sessions', sessionsController)
 

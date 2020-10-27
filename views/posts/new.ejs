@@ -1,5 +1,38 @@
 <%- include('../partials/header.ejs') %>
 
-
+<div class="row s8 offset-s2" >
+	<h2 class="center">New Post</h2>
+	<form class="col s8" action="/posts" metod="POST" enctype="multipart/form-data">
+		<div class="file-field input-field">
+      <div class="btn">
+        <span>Image</span>
+        <input type="file" name="image">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+		<div class="row">
+			<div class="input-field">
+				<input type="text" id="title" name="title" class="validate">
+				<label for="title">Title</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field">
+				<input type="text" id="description" name="description" class="validate">
+				<label for="description">Description</label>
+			</div>
+		</div>
+		<div class="row">
+			LOCATION WITH GOOGS
+		</div>
+		<div class="row">
+			<div class="input-field">
+				<button class="btn waves-effect waves-light" type="submit" name="action">Post</button>
+			</div>
+		</div>
+	</form>
+</div>
 
 <%- include('../partials/footer.ejs') %>

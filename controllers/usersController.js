@@ -4,10 +4,18 @@ const multer = require('multer')
 const router = express.Router()
 const User = require('../models/users.js')
 
+const isAuthorized = (req, res, next) => {
+	if (req.session.currentUser) {
+		return next()
+	} else {
+		res.redirect('/sessions/new')
+	}
+}
+
 // MULTER SETUP
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
-		cb(null, './public/uploads/')
+		cb(null, './public/uploads/users')
 	},
 	filename: (req, file, cb) => {
 		cb(null, Date.now() + file.originalname)
@@ -16,7 +24,7 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req, file, cb) => {
 
-	if(file.mimetype === 'image/jpeg' || file.mimtype === 'image/png' || file.mimtype === 'image/jpg' || file.mimtype === 'image/gif'){
+	if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/gif'){
 		cb(null, true) //accept file
 	} else {
 	 cb(null, false) // reject file
@@ -38,7 +46,7 @@ router.get('/new', (req, res) => {
 	res.render('users/new.ejs',{currentUser: req.session.currentUser})
 })
 
-router.get('/:username/edit', (req, res) => {
+router.get('/:username/edit', isAuthorized, (req, res) => {
 	User.findOne({userName: req.params.username}, (err, foundUser) => {
 		res.render('users/edit.ejs', {
 			currentUser: req.session.currentUser,
@@ -47,7 +55,7 @@ router.get('/:username/edit', (req, res) => {
 	})
 })
 
-router.get('/:username', (req, res) => {
+router.get('/:username', isAuthorized, (req, res) => {
 	User.findOne({userName: req.params.username}, (err, foundUser) => {
 		res.render('users/show.ejs', {
 			currentUser: req.session.currentUser,

@@ -7,9 +7,14 @@ const userSchema = Schema({
 	userName: { type: String, unique: true, required: true },
 	password: { type: String, required: true},
 	bio: { type: String, default: ' ' },
-	profilePic: { type: String, default: ' '}
-
-})
+	profilePic: { type: String, default: ' '},
+	posts: [
+		{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Post'
+		}
+	]
+}, { timestamps: { createdAt: 'created_at' } })
 
 const User = mongoose.model('User', userSchema)
 

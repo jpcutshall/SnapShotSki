@@ -15,7 +15,7 @@ const mongodbURI = process.env.MONGODBURI
 // middleWare
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'))
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(process.cwd() + '/public'));
 app.use('/public/', express.static('uploads'))
 
 

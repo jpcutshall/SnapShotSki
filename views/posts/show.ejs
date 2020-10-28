@@ -1,5 +1,30 @@
 <%- include('../partials/header.ejs') %>
 
+<div class="container">
+	<div class="card col center green lighten-2 z-depth-1">
+		<div class="row"></div>
+		<h3 class="truncate"><%= post.title %></h3>
+		<div class="row"></div>
+		<div class="col s10">
+			<img class="responsive-img" src="../<%= post.image.slice(7) %>" alt="<%= post.title %>">
+		</div>
+		<div class="row"></div>
+		<div class="divider"></div>
+		<div class="col valign-wrapper center">
 
+			<h5 class="flow-text text-black"> &nbsp;
+			 <%= post.description %>
+			</h5>
+
+		</div>
+		<div class="row">&nbsp;</div>
+	<% if(currentUser.userName === post.author) {%>
+		<a class="btn-small waves-effect waves-light" href="./<%=post.id%>/edit">Edit</a>
+		<div class="row">&nbsp;</div>
+	<% } %>
+	</div>
+
+
+</div>
 
 <%- include('../partials/footer.ejs') %>

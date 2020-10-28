@@ -19,19 +19,41 @@
 				<p>
 					<%= user.bio %>
 				</p>
+				<% if(currentUser.userName === user.userName) {%>
 				<a class="btn-small waves-effect waves-light" href="/users/<%=user.userName%>/edit">Edit</a>
+				<% } %>
 			</div>
 		</div>
+
 		<div class="col s8">
+
 			<div class="container">
 				<h2><%= user.userName %></h2>
-				<div class="col card green lighten-4">
-					<% for(let i = 0; i < posts.length; i++) { console.log('POSTS:', posts)%>
-						<div class="col s4 valign">
-							<img class="responsive-img z-depth-3" src="../<%=posts[i].image.slice(7)%>">
+				<div class="row"></div>
+					<div class="row green lighten-3">
+					<div class="section">
+						<div class="row valign-wrapper">
+						<h3 class="left">&nbsp; &nbsp; Posts &nbsp; <i class="small material-icons ">photo_library</i></h3>
+							<div class="input-field col s3 right">
+								<select class="browser-default">
+									<option value="date">Date Created</option>
+									<option value="liked">Most Liked</option>
+								</select>
+							</div>
 						</div>
-					<% } %>
-				</div>
+					</div>
+					<div class="row"></div>
+						<% for(let i = 0; i < posts.length; i++) { %>
+							<a href="../posts/<%= posts[i].id %>">
+								<div class="col s3 hoverable">
+
+									<img class="responsive-img z-depth-3 valign-" src="../<%=posts[i].image.slice(7)%>">
+									<p class="center"><%=posts[i].title%></p>
+								</div>
+							</a>
+						<% } %>
+					</div>
+
 			</div>
 		</div>
 	</div>

@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col s2 card-panel green lighten-3 z-depth-1 offset-s1" >
 			<div class="row">
-				<% if(user.profilePic === ' ') {%>
+				<% if(user.profilePic == null) {%>
 					<i class="large material-icons">account_circle</i>
 				<% } else {%>
 				<img src="../<%= user.profilePic.slice(7) %>" class="responsive-img"/>
@@ -32,14 +32,9 @@
 				<div class="row"></div>
 					<div class="row green lighten-3">
 					<div class="section">
-						<div class="row valign-wrapper">
-						<h3 class="left">&nbsp; &nbsp; Posts &nbsp; <i class="small material-icons ">photo_library</i></h3>
-							<div class="input-field col s3 right">
-								<select id="sort" name="sort" class="browser-default">
-									<option value="new">Newest</option>
-									<option value="liked">Oldest</option>
-								</select>
-							</div>
+						<div class="col s12 center">
+						<h3 class="center">&nbsp; Posts &nbsp; <i class="small material-icons ">photo_library</i></h3>
+
 						</div>
 					</div>
 					<div class="row"></div>

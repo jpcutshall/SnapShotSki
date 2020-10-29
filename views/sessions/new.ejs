@@ -1,11 +1,15 @@
 <%- include('../partials/header.ejs') %>
-<div class="row">
-<form class="col s10" action="/sessions" method="POST">
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div class="col s8 center">
+<form class="col s8" action="/sessions" method="POST">
 <div class="col s10 center">
-	<h3>Login</h3>
+	<h4>Login</h4>
 </div>
 <div class="container">
-	<div class="row s10 center">
+	<div class="container">
+	<div class="col s8 center">
 		<div class="input-field col s5">
 			<input type="text" id="user_name" name="userName" class="validate" required>
 			<label for="user_name">Username</label>
@@ -15,8 +19,9 @@
 			<label for="password">Password</label>
 		</div>
 	</div>
-	<button class="btn waves-effect waves-light" type="submit" name="action">Login</button>
-	</form>
 	</div>
+</div>
+	<button class="btn waves-effect waves-light" type="submit" name="action">Login<i class="material-icons right">account_box</i></button>
+	</form>
 </div>
 <%- include('../partials/footer.ejs') %>

@@ -3,7 +3,7 @@
 		<a href="/" class="brand-logo center"><img class="img-large" src="/KIfav/favicon-32x32.png"></a>
 		<ul id="nav-mobile" class="right hide-on-med-and-down">
 			<% if(currentUser) {%>
-			<li><a href="/posts/new"><i class="large material-icons">add</i></a></li>
+			<li><a href="/posts/new"><i class="large material-icons">add_a_photo</i></a></li>
 			<li><a href="/users/<%= currentUser.userName %>"><%= currentUser.userName %></a> </li>
 			<li>
 			<form class="" action="/sessions?_method=DELETE" method="POST">

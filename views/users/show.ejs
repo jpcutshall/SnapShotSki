@@ -20,7 +20,7 @@
 					<%= user.bio %>
 				</p>
 				<% if(currentUser.userName === user.userName) {%>
-				<a class="btn-small waves-effect waves-light" href="/users/<%=user.userName%>/edit">Edit</a>
+				<a class="btn-small waves-effect waves-light" href="/users/<%=user.userName%>/edit">Edit<i class="material-icons right">account_box</i></a>
 				<% } %>
 			</div>
 		</div>
@@ -35,19 +35,19 @@
 						<div class="row valign-wrapper">
 						<h3 class="left">&nbsp; &nbsp; Posts &nbsp; <i class="small material-icons ">photo_library</i></h3>
 							<div class="input-field col s3 right">
-								<select class="browser-default">
-									<option value="date">Date Created</option>
-									<option value="liked">Most Liked</option>
+								<select id="sort" name="sort" class="browser-default">
+									<option value="new">Newest</option>
+									<option value="liked">Oldest</option>
 								</select>
 							</div>
 						</div>
 					</div>
 					<div class="row"></div>
-						<% for(let i = 0; i < posts.length; i++) { %>
-							<a href="../posts/<%= posts[i].id %>">
+						<% for(let i = (posts.length -1); i >= 0; i--) { %>
+							<a class="black-text" href="../posts/<%= posts[i].id %>">
 								<div class="col s3 hoverable">
 
-									<img class="responsive-img z-depth-3 valign-" src="../<%=posts[i].image.slice(7)%>">
+									<img class="responsive-img z-depth-3" src="../<%=posts[i].image.slice(7)%>">
 									<p class="center"><%=posts[i].title%></p>
 								</div>
 							</a>

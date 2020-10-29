@@ -1,5 +1,6 @@
 const express = require('express')
 const multer = require('multer')
+const fs = require('fs')
 const router = express.Router()
 const Post = require('../models/posts.js')
 
@@ -74,6 +75,13 @@ router.put('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
+	Post.findById(req.params.id, (err, foundPost) => {
+		fs.unlink(foundPost.image, (err) => {
+			if (err) {
+				console.log('ERROR_____', err)
+			}
+		})
+	})
 	Post.findByIdAndRemove(req.params.id, (err, data) => {
 		res.redirect('/users/' + req.session.currentUser.userName)
 	})

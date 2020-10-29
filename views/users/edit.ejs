@@ -5,8 +5,9 @@
 <div class="row">
 	<form class="col s10 offset-s1" action="/users/<%=user.userName%>?_method=PUT" method="POST" enctype="multipart/form-data">
 		<div class="file-field input-field">
+			<p>&nbsp;&nbsp;required</p>
       <div class="btn">
-        <span>Image</span>
+        <span>Image<i class="material-icons right">photo</i></span>
         <input type="file" name="profilePic" value="<%=user.profilePic%>">
       </div>
       <div class="file-path-wrapper">
@@ -34,6 +35,9 @@
 			<button class="btn waves-effect waves-light" type="submit" name="action">Done Editing<i class="material-icons right">account_box</i></button>
 
 		</div>
+	</form>
+	<form class="valign-wrapper" action="/users/<%=user.userName%>?_method=DELETE" method="POST">
+		<button class="btn waves-effect waves-light" type="submit" name="action">Delete<i class="material-icons right">account_box</i></button>
 	</form>
 
 </div>

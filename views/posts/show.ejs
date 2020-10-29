@@ -4,7 +4,7 @@
 	<div class="card col center green lighten-2 z-depth-1">
 		<div class="row"></div>
 		<h3 class="truncate"><%= post.title %></h3>
-		<p>Posted by: <a href="/users/<%= post.author %>"><%= post.author %></a></p>
+		<p>Posted by:  <a class="black-text hoverable" cursor="pointer" href="/users/<%= post.author %>">&nbsp;<%= post.author %>&nbsp;</a></p>
 		<div class="row"></div>
 		<div class="col s10">
 			<img class="responsive-img" src="../<%= post.image.slice(7) %>" alt="<%= post.title %>">

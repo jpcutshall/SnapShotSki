@@ -18,7 +18,7 @@
 				</div>
 				<div class="row"></div>
 				<% for(let i = 0; i < posts.length; i++) { %>
-				<a href="../posts/<%= posts[i].id %>">
+				<a class="black-text" href="../posts/<%= posts[i].id %>">
 					<div class="col s3 hoverable">
 						<img class="responsive-img z-depth-3" src="../<%=posts[i].image.slice(7)%>">
 						<p class="center"><%=posts[i].title%></p>

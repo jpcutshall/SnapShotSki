@@ -1,13 +1,10 @@
 const bcrypt = require('bcrypt')
 const express = require('express')
+const fs = require('fs')
 const multer = require('multer')
-
 const router = express.Router()
-
 const User = require('../models/users.js')
 const Post = require('../models/posts.js')
-
-
 
 const isAuthorized = (req, res, next) => {
 	if (req.session.currentUser) {
@@ -40,7 +37,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
 	storage: storage,
 		limits: {
-			fileSize: 1024 * 1024 * 50
+			fileSize: 1024 * 1024 * 20
 				},
 		fileFilter: fileFilter
  })
@@ -61,7 +58,6 @@ router.get('/:username/edit', isAuthorized, (req, res) => {
 })
 
 router.get('/:username', isAuthorized, (req, res) => {
-
 	User.findOne({userName: req.params.username}, (err, foundUser) => {
 		Post.find( { author: req.params.username}, (err, foundPosts) => {
 			res.render('users/show.ejs', {
@@ -89,6 +85,19 @@ router.post('/', upload.single('profilePic'), (req, res) => {
 	console.log(req.file)
 	User.create(obj, (err, createdUser) => {
 		console.log('Account Created!', createdUser)
+		res.redirect('/')
+	})
+})
+
+router.delete('/:username', (req, res) => {
+	User.find({userName: req.params.username}, (err, foundUser) => {
+		fs.unlink('./' + foundUser.profilePic, (err) => {
+			if (err) {
+				console.log('ERROR_____', err)
+			}
+		})
+	})
+	User.findOneAndRemove({userName: req.params.username}, (err, data) => {
 		res.redirect('/')
 	})
 })

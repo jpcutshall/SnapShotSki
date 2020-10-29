@@ -5,10 +5,9 @@
 <div class="row">
 	<form class="col s10 offset-s1" action="/users/<%=user.userName%>?_method=PUT" method="POST" enctype="multipart/form-data">
 		<div class="file-field input-field">
-			<p>&nbsp;&nbsp;required</p>
       <div class="btn">
         <span>Image<i class="material-icons right">photo</i></span>
-        <input type="file" name="profilePic" value="<%=user.profilePic%>">
+        <input type="file" name="profilePic" value="<%=user.profilePic%>" required>
       </div>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">

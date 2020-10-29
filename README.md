@@ -1,7 +1,7 @@
 # SnapShot-ki
 Project 2 for General Assembly SEI
 
-link to [Live App]{https://snapshot-ki.herokuapp.com/}
+[Live App](https://snapshot-ki.herokuapp.com/)
 
 ## About
 SnapShot-Ki is an app built using the following Technologies

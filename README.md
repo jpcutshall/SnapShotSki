@@ -1,7 +1,7 @@
 # SnapShot-ki
 Project 2 for General Assembly SEI
 
-[Live App]{https://snapshot-ki.herokuapp.com/}
+link to [Live App]{https://snapshot-ki.herokuapp.com/}
 
 ## About
 SnapShot-Ki is an app built using the following Technologies
@@ -24,4 +24,4 @@ SnapShot-Ki is an app built using the following Technologies
 
 1. if user deletes account pictures are left and trying to go to account is dead end.
 2. images need to go to cloud for the app to be persistent with the images
-3. 
+3.

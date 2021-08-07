@@ -7,7 +7,7 @@
 				<% if(user.profilePic == null) {%>
 					<i class="large material-icons">account_circle</i>
 				<% } else {%>
-				<img src="../<%= user.profilePic.slice(7) %>" class="responsive-img"/>
+				<img src="data:image/jpeg;base64, <%= user.profilePic.data %>"" class="responsive-img"/>
 				<% } %>
 				<div class="row">
 					<% if(!(user.firstName === ' ') && !(user.lastName === ' ')) {%>

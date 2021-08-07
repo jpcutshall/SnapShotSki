@@ -24,15 +24,23 @@ app.use(
   session({
     secret: process.env.SECRET,
     resave: false,
-    saveUninitialiazed: false
+    saveUninitialized: false
   })
 )
 
 // mongoose connection code
-mongoose.connect(mongodbURI, { useNewUrlParser: true})
+mongoose.connect(mongodbURI, 
+{ useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
+
+
 mongoose.connection.once('open', ()=> {
-    console.log('connected to mongo');
+  console.log('connected to mongo');
 });
+
+
+mongoose.set('useUnifiedTopology', true)
+
+
 
 // controllers
 const usersController = require('./controllers/usersController.js')

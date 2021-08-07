@@ -5,7 +5,10 @@ const postSchema = Schema({
 	title:  { type: String, required: true, unique: true},
 	description: String,
 	location: String,
-	image: { type: String, required: true},
+	image: {
+		data: Buffer,
+        contentType: String, 
+	},
 	likes: [
 	{
 		type: String,

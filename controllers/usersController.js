@@ -1,7 +1,8 @@
 const bcrypt = require('bcrypt')
 const express = require('express')
-const fs = require('fs')
 const multer = require('multer')
+const fs = require('fs')
+
 const router = express.Router()
 const User = require('../models/users.js')
 const Post = require('../models/posts.js')
@@ -14,33 +15,18 @@ const isAuthorized = (req, res, next) => {
 	}
 }
 
-// MULTER SETUP
+
+
 const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, './public/uploads/users')
-	},
-	filename: (req, file, cb) => {
-		cb(null, Date.now() + file.originalname)
-	}
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '_' + Date.now())
+    }
 })
 
-const fileFilter = (req, file, cb) => {
-
-	if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/gif'){
-		cb(null, true) //accept file
-	} else {
-	 cb(null, false) // reject file
-	}
-
-}
-
-const upload = multer({
-	storage: storage,
-		limits: {
-			fileSize: 1024 * 1024 * 20
-				},
-		fileFilter: fileFilter
- })
+const upload = multer({ storage })
 
 
 // ROUTES
@@ -59,19 +45,25 @@ router.get('/:username/edit', isAuthorized, (req, res) => {
 
 router.get('/:username', isAuthorized, (req, res) => {
 	User.findOne({userName: req.params.username}, (err, foundUser) => {
+		
+		foundUser.profilePic.data = new Buffer.from(foundUser.profilePic.data.buffer).toString('base64')
+
 		Post.find( { author: req.params.username}, (err, foundPosts) => {
 			res.render('users/show.ejs', {
 				currentUser: req.session.currentUser,
 				user: foundUser,
 				posts: foundPosts
 
-				})
 			})
+		})
 	})
 })
 
 router.post('/', upload.single('profilePic'), (req, res) => {
+
 	req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
+
+	console.log(req?.file)
 
 	const obj = {
 		firstName: req.body.firstName,
@@ -79,7 +71,10 @@ router.post('/', upload.single('profilePic'), (req, res) => {
 		userName: req.body.userName,
 		password: req.body.password,
 		bio: req.body.bio,
-		profilePic: req.file.path
+		profilePic: {
+			data: fs.readFileSync('./uploads/' + req.file?.filename) ?? '',
+			contentType: 'image/jpeg'
+		}
 
 	}
 	console.log(req.file)

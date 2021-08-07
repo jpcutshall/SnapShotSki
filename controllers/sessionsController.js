@@ -9,8 +9,8 @@ router.get('/new', (req, res) => {
 })
 
 router.post('/', (req, res) => {
- console.log(req.body)
-	User.findOne({ userName: req.body.userName}, (err, foundUser) => {
+ 	console.log(req.body)
+	User.findOne({ username: req.body.username}, (err, foundUser) => {
 		if (err) {
 			console.log(err)
 			res.send('oops there was an unexpected issue', err)

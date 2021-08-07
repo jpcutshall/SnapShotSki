@@ -21,16 +21,14 @@
   },
   "homepage": "https://github.com/jpcutshall/SnapShotSki#readme",
   "dependencies": {
-    "aws-sdk": "^2.781.0",
     "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
-    "fs": "0.0.1-security",
     "method-override": "^3.0.0",
-    "mongoose": "^5.10.9",
-    "multer": "^1.4.2",
-    "multer-s3": "^2.9.0"
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.10",
+    "multer": "^1.4.2"
   }
 }

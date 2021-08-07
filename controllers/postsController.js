@@ -1,6 +1,7 @@
 const express = require('express')
 const multer = require('multer')
 const fs = require('fs')
+
 const router = express.Router()
 const Post = require('../models/posts.js')
 
@@ -12,34 +13,16 @@ const isAuthorized = (req, res, next) => {
 	}
 }
 
-// MULTER SETUP
 const storage = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, './public/uploads/posts')
-	},
-	filename: (req, file, cb) => {
-		cb(null, Date.now() + file.originalname)
-	}
+    destination: (req, file, cb) => {
+        cb(null, 'uploads')
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '_' + Date.now())
+    }
 })
 
-const fileFilter = (req, file, cb) => {
-
-	if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/gif'){
-		cb(null, true) //accept file
-	} else {
-	 cb(null, false) // reject file
-	}
-}
-
-const upload = multer({
-	storage: storage,
-		limits:
-		{
-			fileSize: 1024 * 1024 * 50
-		},
-		fileFilter: fileFilter
-	}
-)
+const upload = multer({ storage })
 
 // ROUTES
 router.get('/new', (req, res) => {
@@ -48,9 +31,11 @@ router.get('/new', (req, res) => {
 
 router.get('/:id', isAuthorized, (req, res) => {
 	Post.findById(req.params.id, (err, foundPost) => {
+
+		foundPost.image.data = new Buffer.from(foundPost.image.data.buffer).toString('base64')
+
 		console.log(foundPost)
-		res.render('posts/show.ejs',
-		{
+		res.render('posts/show.ejs', {
 			currentUser: req.session.currentUser,
 			post: foundPost
 		})
@@ -92,7 +77,10 @@ router.post('/', upload.single('image'), (req, res) => {
 	const postObj = {
 		title: req.body.title,
 		description: req.body.description,
-		image: req.file.path,
+		image: {
+			data: fs.readFileSync('./uploads/' + req.file?.filename) ?? '',
+			contentType: 'image/jpeg'
+		},
 		author: req.session.currentUser.userName
 	}
 	Post.create(postObj, (err, createdPost) => {

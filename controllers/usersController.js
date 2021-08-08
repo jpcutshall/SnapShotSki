@@ -46,9 +46,16 @@ router.get('/:username/edit', isAuthorized, (req, res) => {
 router.get('/:username', isAuthorized, (req, res) => {
 	User.findOne({userName: req.params.username}, (err, foundUser) => {
 		
-		foundUser.profilePic.data = new Buffer.from(foundUser.profilePic.data.buffer).toString('base64')
+		foundUser.profilePic.data = 
+		new Buffer.from(foundUser.profilePic.data.buffer).toString('base64')
 
 		Post.find( { author: req.params.username}, (err, foundPosts) => {
+
+			for (let i = 0; i < foundPosts.length; i++) {
+				foundPosts[i].image.data = 
+				new Buffer.from(foundPosts[i].image.data.buffer).toString('base64')
+			}
+
 			res.render('users/show.ejs', {
 				currentUser: req.session.currentUser,
 				user: foundUser,
@@ -63,8 +70,6 @@ router.post('/', upload.single('profilePic'), (req, res) => {
 
 	req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10))
 
-	console.log(req?.file)
-
 	const obj = {
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
@@ -75,16 +80,15 @@ router.post('/', upload.single('profilePic'), (req, res) => {
 			data: fs.readFileSync('./uploads/' + req.file?.filename) ?? '',
 			contentType: 'image/jpeg'
 		}
-
 	}
-	console.log(req.file)
+
 	User.create(obj, (err, createdUser) => {
-		console.log('Account Created!', createdUser)
 		res.redirect('/')
 	})
 })
 
 router.delete('/:username', (req, res) => {
+
 	User.find({userName: req.params.username}, (err, foundUser) => {
 		fs.unlink('./' + foundUser.profilePic, (err) => {
 			if (err) {
@@ -92,18 +96,22 @@ router.delete('/:username', (req, res) => {
 			}
 		})
 	})
+
 	User.findOneAndRemove({userName: req.params.username}, (err, data) => {
 		res.redirect('/')
 	})
 })
 
 router.put('/:username', upload.single('profilePic'), (req, res) => {
+
 	const editedObj = {
 		firstName: req.body.firstName,
 		lastName: req.body.lastName,
 		bio: req.body.bio,
-		profilePic: req.file.path
-
+		profilePic: {
+			data: fs.readFileSync('./uploads/' + req.file?.filename) ?? '',
+			contentType: 'image/jpeg'
+		}
 	}
 	User.findOneAndUpdate({userName: req.params.username}, editedObj, (err, updatedUser) => {
 		res.redirect('/users/' + req.params.username)

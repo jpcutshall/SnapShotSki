@@ -55,8 +55,13 @@ app.use('/sessions', sessionsController)
 
 app.get('/', (req,res) => {
   Post.find( (err, foundPosts) => {
-    res.render('home.ejs',
-    {
+
+    for (let i = 0; i < foundPosts.length; i++) {
+      foundPosts[i].image.data = 
+      new Buffer.from(foundPosts[i].image.data.buffer).toString('base64')
+    }
+
+    res.render('home.ejs', {
       currentUser: req.session.currentUser,
       posts: foundPosts
     })

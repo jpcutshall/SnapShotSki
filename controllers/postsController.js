@@ -32,9 +32,9 @@ router.get('/new', (req, res) => {
 router.get('/:id', isAuthorized, (req, res) => {
 	Post.findById(req.params.id, (err, foundPost) => {
 
-		foundPost.image.data = new Buffer.from(foundPost.image.data.buffer).toString('base64')
+		foundPost.image.data = 
+		new Buffer.from(foundPost.image.data.buffer).toString('base64');
 
-		console.log(foundPost)
 		res.render('posts/show.ejs', {
 			currentUser: req.session.currentUser,
 			post: foundPost
@@ -43,10 +43,10 @@ router.get('/:id', isAuthorized, (req, res) => {
 })
 
 router.get('/:id/edit', (req, res) => {
+
 	Post.findById(req.params.id, (err, foundPost) => {
-		console.log(foundPost)
-		res.render('posts/edit.ejs',
-		{
+		
+		res.render('posts/edit.ejs', {
 			currentUser: req.session.currentUser,
 			post: foundPost
 		})
@@ -54,13 +54,17 @@ router.get('/:id/edit', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
+
 	Post.findByIdAndUpdate(req.params.id, req.body,  (err, updatedPost) => {
+
 		res.redirect('/users/' + req.session.currentUser.userName)
 	})
 })
 
 router.delete('/:id', (req, res) => {
+
 	Post.findById(req.params.id, (err, foundPost) => {
+
 		fs.unlink(foundPost.image, (err) => {
 			if (err) {
 				console.log('ERROR_____', err)
@@ -84,7 +88,6 @@ router.post('/', upload.single('image'), (req, res) => {
 		author: req.session.currentUser.userName
 	}
 	Post.create(postObj, (err, createdPost) => {
-		console.log('Post Posted! ', createdPost)
 		res.redirect('/')
 	})
 })

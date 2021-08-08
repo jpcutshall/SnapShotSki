@@ -7,7 +7,7 @@
 		<p>Posted by:  <a class="black-text hoverable" cursor="pointer" href="/users/<%= post.author %>">&nbsp;<%= post.author %>&nbsp;</a></p>
 		<div class="row"></div>
 		<div class="col s10">
-			<img class="responsive-img" src="../<%= post.image.slice(7) %>" alt="<%= post.title %>">
+			<img class="responsive-img" src="data:image/jpeg;base64, <%= post.image.data %>" alt="<%= post.title %>">
 		</div>
 		<div class="row"></div>
 		<div class="divider"></div>

@@ -7,7 +7,7 @@
 				<% if(user.profilePic == null) {%>
 					<i class="large material-icons">account_circle</i>
 				<% } else {%>
-				<img src="data:image/jpeg;base64, <%= user.profilePic.data %>"" class="responsive-img"/>
+				<img src="data:image/jpeg;base64, <%= user.profilePic.data %>" class="responsive-img"/>
 				<% } %>
 				<div class="row">
 					<% if(!(user.firstName === ' ') && !(user.lastName === ' ')) {%>
@@ -42,7 +42,7 @@
 							<a class="black-text" href="../posts/<%= posts[i].id %>">
 								<div class="col s3 hoverable">
 
-									<img class="responsive-img z-depth-3" src="../<%=posts[i].image.slice(7)%>">
+									<img class="responsive-img z-depth-3" src="data:image/jpeg;base64, <%=posts[i].image.data%>">
 									<p class="center"><%=posts[i].title%></p>
 								</div>
 							</a>

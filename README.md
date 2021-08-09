@@ -1,5 +1,4 @@
 # SnapShot-ki
-Project 2 for General Assembly SEI
 
 [Live App](https://snapshotski.herokuapp.com/)
 
